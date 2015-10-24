@@ -21,6 +21,9 @@ Native Dialogs
 * C++11 support and required
 * Easy to use
 * Native user interface
+* Native message dialog
+* Native file chooser dialog
+* Native color picker dialog
 
 ### Message Dialog
 
