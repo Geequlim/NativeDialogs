@@ -1,0 +1,3 @@
+[submodule "src/win/bubble"]
+	path = src/win/bubble
+	url = git@github.com:r-lyeh/bubble.git
