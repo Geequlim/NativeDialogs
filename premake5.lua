@@ -17,11 +17,13 @@ solution 'NativeDialog'
         includedirs {'src'}
         files { 'test.cc','src/**' }
         removefiles {"src/**.mm"}
-        removefiles {'src/win/**'}
+        removefiles {'src/win/bubble/*'}
         if os.get() == 'linux' then
             buildoptions {'`pkg-config --cflags gtk+-3.0 glib-2.0`'}
             links {'gtk-3','glib-2.0','gobject-2.0'}
         elseif os.get() == 'macosx' then
           links {'Cocoa.framework'}
           files { 'src/osx/**' }
+        elseif os.get() == 'windows' then
+          files {'src/win/bubble/bubble.*pp'}
         end

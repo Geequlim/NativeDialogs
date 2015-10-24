@@ -2,6 +2,11 @@
 #ifdef ND_PLATFORM_GTK 
   #include <gtk/gtk.h>
 #endif
+#ifdef ND_PLATFORM_WIN
+#include <Windows.h>
+#include <Winnls.h>
+#endif
+
 namespace NativeDialog
 {
    // define null string
@@ -40,5 +45,49 @@ namespace NativeDialog
             }
             return result;
         }
+#ifdef ND_PLATFORM_WIN
+
+		wstring nullwstr;
+
+		wstring string2wstring(const string& utf8Str)
+		{
+			int len = MultiByteToWideChar(CP_UTF8, 0, utf8Str.c_str(), -1, NULL, 0);
+			if (len == 0)
+				return nullwstr;
+			vector<wchar_t> unicode(len);
+			MultiByteToWideChar(CP_UTF8, 0, utf8Str.c_str(), -1, &unicode[0], len);
+			return wstring(&unicode[0]);
+		}
+
+		string wstring2string(const wstring& wideStr)
+		{
+			int len = WideCharToMultiByte(CP_UTF8, 0, wideStr.c_str(), -1, NULL, 0, NULL, NULL);
+			if (len == 0)
+				return nullstr;
+			vector<char> utf8(len);
+			WideCharToMultiByte(CP_UTF8, 0, wideStr.c_str(), -1, &utf8[0], len, NULL, NULL);
+			return string(&utf8[0]);
+		}
+
+		wstring multibyteString2wstring(const string& multibyteStr)
+		{
+			int len = MultiByteToWideChar(CP_ACP, 0, multibyteStr.c_str(), -1, NULL, 0);
+			if (len == 0)
+				return nullwstr;
+			vector<wchar_t> unicode(len);
+			MultiByteToWideChar(CP_ACP, 0, multibyteStr.c_str(), -1, &unicode[0], len);
+			return wstring(&unicode[0]);
+		}
+
+		string wstring2multibyteString(const wstring& wideStr)
+		{
+			int len = WideCharToMultiByte(CP_ACP, 0, wideStr.c_str(), -1, NULL, 0, NULL, NULL);
+			if (len == 0)
+				return nullstr;
+			vector<char> utf8(len);
+			WideCharToMultiByte(CP_ACP, 0, wideStr.c_str(), -1, &utf8[0], len, NULL, NULL);
+			return string(&utf8[0]);
+		}
+#endif
     }
 }

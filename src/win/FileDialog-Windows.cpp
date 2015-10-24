@@ -9,10 +9,11 @@
 #define PAHT_MAX_LENGHT 4096
 #endif
 
-namespace Walnut
+namespace NativeDialog
 {
-	namespace Util
-	{
+		using String::wstring;
+		using String::nullwstr;
+
 		//The static variable for default diretory
 		static wstring init_directory = nullwstr;
 
@@ -42,7 +43,7 @@ namespace Walnut
 			TCHAR szBuffer[PAHT_MAX_LENGHT] = { 0 };
 
 			// The dialog window title
-			TCHAR *_wndTitle = string2TString(m_wndTitle);
+			TCHAR *_wndTitle = string2TString(m_title);
 
 			// The initilize directory
 			TCHAR *_initDir = string2TString(m_defaultPath);
@@ -202,13 +203,11 @@ namespace Walnut
 			selected = m_selectedPathes.size() != 0;
 			if(selected)
 			{
-				Event e(NormalEventType::CONFIRMED, false, false);
-				dispatchEvent(e);
+				m_decideHandler(*this);
 			}
 			else
 			{
-				Event e(NormalEventType::CANCELED, false, false);
-				dispatchEvent(e);
+				m_cancelHandler(*this);
 			}
 		}
 
@@ -258,6 +257,5 @@ namespace Walnut
 			}
 			return selected;
 		}
-	}
 }
 #endif

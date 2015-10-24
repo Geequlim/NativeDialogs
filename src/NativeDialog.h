@@ -88,6 +88,38 @@ namespace NativeDialog
     {
         /// split string with pattern
         vector<string> split(const string & soueceStr,const string& pattern);
+
+#ifdef  ND_PLATFORM_WIN
+		using std::wstring;
+		extern wstring nullwstr;
+		/*!
+		@brief Convert utf-8 string to wide string
+		@param utf8Str The source string to convert
+		@return The generated wide string
+		*/
+		wstring string2wstring(const string& utf8Str);
+
+		/*!
+		@brief Convert wide string to utf-8 string
+		@param wideStr The source string to convert
+		@return The generated string
+		*/
+		string wstring2string(const wstring& wideStr);
+
+		/*!
+		@brief Convert multibyte string to wide string
+		@param multibyteStr The source string to convert
+		@return The generated wide string
+		*/
+		wstring multibyteString2wstring(const string& multibyteStr);
+
+		/*!
+		@brief Convert wide  string to wide string
+		@param wideStr The source string to convert
+		@return The generated multibyte string
+		*/
+		string wstring2multibyteString(const wstring& wideStr);
+#endif //ND_PLATFORM_WIN
     }
 }
 

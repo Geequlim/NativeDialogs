@@ -51,7 +51,8 @@ int main(int argc , char *argv[] )
            .addFilter("Text Files","txt")
            .addFilter("Code files","c;cpp;h;hpp")
            .addFilter("All files","*")
-           //            .setSaveMode(true) // Set save mode
+		   //.setAllowsDirectorySelection(true)
+           //.setSaveMode(true) // Set save mode
            .setDecideHandler(fileSelHandler)
            .setCancelHandler( [](const Dialog& dlg)
                              {
@@ -63,16 +64,7 @@ int main(int argc , char *argv[] )
     }
     )
     .show();
-    
-    ColorPickerDialog cdlg("Pick a color you like");
-    cdlg.setColor({1,0,1,1})
-    .setDecideHandler( [](const Dialog& dlg){
-        auto colorDlg = dynamic_cast<const ColorPickerDialog&>(dlg);
-        auto color = colorDlg.color();
-        // Get color value with color.r,color.g,color.b and color.a
-    })
-    .show();
-    
+
     return 0;
 }
 

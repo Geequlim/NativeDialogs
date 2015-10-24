@@ -1,11 +1,10 @@
 #include "../NativeDialog.h"
 #ifdef ND_PLATFORM_WIN
-
+#include <Windows.h>
 #include <Commdlg.h>
-namespace Walnut
-{
-	namespace Util
-	{
+namespace NativeDialog
+{	
+	using String::wstring;
 		void ColorPickerDialog::show()
 		{
 			CHOOSECOLOR cc;                 // common dialog box structure 
@@ -14,9 +13,9 @@ namespace Walnut
 
 			
 			static DWORD rgbCurrent = RGB( // initial color selection
-						m_color.r, 
-						m_color.g,
-						m_color.b);        
+						m_color.r*255, 
+						m_color.g*255,
+						m_color.b*255);        
 			
 			// Initialize CHOOSECOLOR 
 			ZeroMemory(&cc, sizeof(cc));
@@ -33,14 +32,12 @@ namespace Walnut
 				m_color = { GetRValue(rgbCurrent)/255.0,
 							GetGValue(rgbCurrent)/255.0,
 							GetBValue(rgbCurrent)/255.0,
-							m_color.alphaPercent() };
-				Event e(NormalEventType::CONFIRMED, false, false);
-				dispatchEvent(e);
+							m_color.a };
+				m_decideHandler(*this);
 			}
 			else
 			{
-				Event e(NormalEventType::CANCELED, false, false);
-				dispatchEvent(e);
+				m_cancelHandler(*this);
 			}
 		}
 
@@ -48,6 +45,5 @@ namespace Walnut
 		{
 
 		}
-	}
 }
-#endif
+#endif //ND_PLATFORM_WIN
