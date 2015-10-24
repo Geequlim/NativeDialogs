@@ -7,11 +7,11 @@ Native Dialogs
 * inclue NativeDialog.h file to your code
 * Remove code under osx if it's not a OSX application
 
-### dependence
+### Dependences
 
 * r-lyeh's [bubble](https://github.com/r-lyeh/bubble) for message dialog on Window
 * GTK3 is required on Linux
-* Cocoa framwork on Mac OSX
+* Cocoa framework on Mac OSX
 
 # Usage:
 
@@ -113,8 +113,11 @@ GTK|![](screenshot/gtk_color_picker.png)
 
 * Color Picker Dialog won't pause your thread on Mac OSX
 * File Dialogs support set host window with a `NSWindow*` value by `setHostWindow` method on Mac OSX
+* Filters of File Dialog are invisible but it works on Mac OSX
 
 Here is a demo that use a glfw window as host window for Mac OSX : [test.osx.mm](test.osx.mm)
+
+![](osx_with_glfw.png)
 
 #### TODO:
 
