@@ -31,6 +31,7 @@ MessageDialog("Notice","Hello World!",{"Close"}).show();
 
 Platform|Screenshot
 ---|---
+OS X|![](screenshot/osx_message_0.png)
 GTK|![](screenshot/gtk_message_0.png)
 
 * Deal events as you like
@@ -50,6 +51,7 @@ mdlg.setDecideHandler([](const Dialog& dlg){
 ```
 Platform|Screenshot
 ---|---
+OS X|![](screenshot/osx_message_1.png)
 GTK|![](screenshot/gtk_message_1.png)
 
 
@@ -82,6 +84,7 @@ fdlg.setDefaultPath("..")
 ```
 Platform|Screenshot
 ---|---
+OS X|![](screenshot/osx_file_open.png)
 GTK|![](screenshot/gtk_file_open.png)
 
 ### Color Picker Dialog
@@ -101,9 +104,17 @@ cdlg.setColor({1,0,1,1}) // Set default selected color
 
 Platform|Screenshot
 ---|---
+OS X|![](screenshot/osx_color_picker.png)
 GTK|![](screenshot/gtk_color_picker.png)
 
 #### More about usage : [test.cc](test.cc)
+
+### Notice for platform specifications
+
+* Color Picker Dialog won't pause your thread on Mac OSX
+* File Dialogs support set host window with a `NSWindow*` value by `setHostWindow` method on Mac OSX
+
+Here is a demo that use a glfw window as host window for Mac OSX : [test.osx.mm](test.osx.mm)
 
 #### TODO:
 

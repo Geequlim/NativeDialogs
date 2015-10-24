@@ -3,26 +3,27 @@
 
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
+#include <map>
 
-using namespace Walnut;
+using namespace NativeDialog;
 
-@interface WalnutColorPanel : NSObject
+@interface OSXColorPanel : NSObject
 -(void)colorUpdate:(NSColorPanel*)colorPanel;
--(void)show:(Walnut::Util::ColorPickerDialog*)dialog;
-@property Walnut::Util::ColorPickerDialog* dialog;
+-(void)show:(ColorPickerDialog*)dialog;
+@property ColorPickerDialog* dialog;
 @end
 
-@implementation WalnutColorPanel
--(void)show:(Walnut::Util::ColorPickerDialog*)dialog{
+@implementation OSXColorPanel
+-(void)show:(NativeDialog::ColorPickerDialog*)dialog{
     [self setDialog:dialog];
     NSColorPanel *colorPanel = [NSColorPanel sharedColorPanel];
     if(dialog)
     {
-        const Color & color = dialog->color();
-        NSColor* nscolor = [NSColor colorWithRed:color.redPercent()
-                                            green:color.greenPercent()
-                                            blue:color.bluePercent()
-                                            alpha:color.alphaPercent()];
+        const auto & color = dialog->color();
+        NSColor* nscolor = [NSColor colorWithRed:color.r
+                                            green:color.g
+                                            blue:color.b
+                                            alpha:color.a];
         
         [colorPanel setColor:nscolor];
         [colorPanel setTitle: [NSString stringWithUTF8String:dialog->title().c_str()]];
@@ -32,41 +33,60 @@ using namespace Walnut;
     [colorPanel setAction: @selector(colorUpdate:) ];
     [colorPanel setIsVisible:YES];
 }
+
 -(void)colorUpdate:(NSColorPanel*)colorPanel{
     NSColor* theColor = colorPanel.color;
-    Color color{
+    ColorPickerDialog::Color color({
         [theColor redComponent] ,
         [theColor greenComponent],
         [theColor blueComponent],
         [theColor alphaComponent]
-    };
+    });
     
     if(_dialog)
     {   _dialog->setColor(color);
-        Event e(NormalEventType::CONFIRMED,false,false);
-        _dialog->dispatchEvent(e);
+        _dialog->decideHandler()(*_dialog);
     }
 }
 @end
 
-namespace Walnut
+namespace NativeDialog
 {
-    namespace Util
+    OSXColorPanel * nativeCaller = nil;
+    
+    std::map<ColorPickerDialog*,OSXColorPanel*> dialog_panelMap;
+    
+    
+    void ColorPickerDialog::show()
     {
-        WalnutColorPanel * nativeCaller = nil;
-        void ColorPickerDialog::show()
+        auto foundIt = dialog_panelMap.find(this);
+        if( foundIt == dialog_panelMap.end() || foundIt->second == nullptr )
         {
-            if(nativeCaller == nil) nativeCaller = [[WalnutColorPanel alloc]init];
-            [nativeCaller show:this];
+            OSXColorPanel* colorPanel = [[OSXColorPanel alloc]init];
+            dialog_panelMap[this] = colorPanel;
+            [colorPanel show:this];
+        }
+        else
+        {
+            OSXColorPanel* colorPanel = foundIt->second;
+            [colorPanel show:this];
         }
         
-        ColorPickerDialog::~ColorPickerDialog()
+    }
+
+    ColorPickerDialog::~ColorPickerDialog()
+    {
+        auto foundIt = dialog_panelMap.find(this);
+        if( foundIt!= dialog_panelMap.end())
         {
-            if(nativeCaller)
+            OSXColorPanel* bindPanel = foundIt->second;
+            if( bindPanel )
             {
-                [nativeCaller setDialog:nullptr];
-                [nativeCaller release];
+                [bindPanel setDialog:nullptr];
+                [bindPanel release];
             }
+            foundIt->second = nullptr;
+            dialog_panelMap[this] = nullptr;
         }
     }
 }

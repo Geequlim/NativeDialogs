@@ -84,6 +84,11 @@ namespace NativeDialog
     };
     
     
+    namespace String
+    {
+        /// split string with pattern
+        vector<string> split(const string & soueceStr,const string& pattern);
+    }
 }
 
 #include "FileDialog.h"

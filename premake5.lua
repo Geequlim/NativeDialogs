@@ -1,4 +1,4 @@
-workspace 'NativeDialog'
+solution 'NativeDialog'
     location ( '.build' )
     flags {'C++11'}
     configurations { 'Debug', 'Release' }
@@ -17,7 +17,11 @@ workspace 'NativeDialog'
         includedirs {'src'}
         files { 'test.cc','src/**' }
         removefiles {"src/**.mm"}
+        removefiles {'src/win/**'}
         if os.get() == 'linux' then
             buildoptions {'`pkg-config --cflags gtk+-3.0 glib-2.0`'}
             links {'gtk-3','glib-2.0','gobject-2.0'}
+        elseif os.get() == 'macosx' then
+          links {'Cocoa.framework'}
+          files { 'src/osx/**' }
         end
