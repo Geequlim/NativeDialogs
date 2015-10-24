@@ -6,6 +6,7 @@ Native Dialogs
 * Add all files under src to your project
 * inclue NativeDialog.h file to your code
 * Remove code under osx if it's not a OSX application
+* Remove code under win if it's not a Windows application
 
 ### Dependences
 
