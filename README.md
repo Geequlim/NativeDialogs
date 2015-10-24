@@ -2,28 +2,27 @@ Native Dialogs
 -----------------
 **Use native dialogs with same code on Windows,Mac OSX and Linux(GTK3 required).**
 
-### Integrate to your project
-* Add all files under src to your project
-* inclue NativeDialog.h file to your code
-* Remove code under osx if it's not a OSX application
-* Remove code under win if it's not a Windows application
-
-### Dependences
-
-* r-lyeh's [bubble](https://github.com/r-lyeh/bubble) for message dialog on Window
-* GTK3 is required on Linux
-* Cocoa framework on Mac OSX
-
-# Usage:
-
-### Features:
-
+## Features:
 * C++11 support and required
 * Easy to use
 * Native user interface
 * Native message dialog
 * Native file chooser dialog
 * Native color picker dialog
+
+## Integrate to your project
+* Add all files under src to your project
+* inclue NativeDialog.h file to your code
+* Remove code under osx if it's not a OSX application
+* Remove code under win if it's not a Windows application
+
+## Dependences
+
+* r-lyeh's [bubble](https://github.com/r-lyeh/bubble) for message dialog on Window
+* GTK3 is required on Linux
+* Cocoa framework on Mac OSX
+
+## Usage:
 
 ### Message Dialog
 
@@ -136,3 +135,6 @@ Here is a demo that use a glfw window as host window for Mac OSX : [test.osx.mm]
 #### TODO:
 
 * Native font select dialog
+
+## LICENSE
+Under [MIT LICENSE](LICENSE.txt) .
