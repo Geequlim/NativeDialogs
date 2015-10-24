@@ -117,7 +117,7 @@ GTK|![](screenshot/gtk_color_picker.png)
 
 Here is a demo that use a glfw window as host window for Mac OSX : [test.osx.mm](test.osx.mm)
 
-![](osx_with_glfw.png)
+![](screenshot/osx_with_glfw.png)
 
 #### TODO:
 
