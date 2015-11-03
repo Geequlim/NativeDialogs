@@ -21,7 +21,7 @@ namespace NativeDialog
       gtk_widget_show_all (dialog);
       
       // Add buttons
-      for(int responseID=0; responseID!= m_buttons.size(); ++responseID)
+      for(int responseID=0; responseID!= int(m_buttons.size()); ++responseID)
       {
         gtk_dialog_add_button( (GtkDialog*)dialog,
                     m_buttons[responseID].c_str(),
@@ -30,7 +30,7 @@ namespace NativeDialog
       }
       // Show the dialog and retrive the selection result
       m_responseIndex =  gtk_dialog_run (GTK_DIALOG (dialog));
-      if( m_responseIndex!= GTK_RESPONSE_NONE && m_responseIndex<m_buttons.size() )
+      if( m_responseIndex!= GTK_RESPONSE_NONE && m_responseIndex<int(m_buttons.size()) )
       {
         m_decideHandler(*this);
       }

@@ -56,7 +56,7 @@ namespace NativeDialog
     inline const string& responseButtonTitle()const
     {
       const string* buttonTitle = &nullstr;
-      if( m_responseIndex>=0 && m_responseIndex<m_buttons.size() )
+      if( m_responseIndex>=0 && m_responseIndex< int(m_buttons.size()) )
         buttonTitle = &m_buttons.at(m_responseIndex);
       return *buttonTitle;
     }
