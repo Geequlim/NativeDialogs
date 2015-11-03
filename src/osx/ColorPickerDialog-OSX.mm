@@ -24,7 +24,7 @@ using namespace NativeDialog;
                                             green:color.g
                                             blue:color.b
                                             alpha:color.a];
-        
+
         [colorPanel setColor:nscolor];
         [colorPanel setTitle: [NSString stringWithUTF8String:dialog->title().c_str()]];
     }
@@ -42,10 +42,10 @@ using namespace NativeDialog;
         [theColor blueComponent],
         [theColor alphaComponent]
     });
-    
-    if(_dialog)
-    {   _dialog->setColor(color);
-        _dialog->decideHandler()(*_dialog);
+
+    if( [self dialog] )
+    {   [self dialog]->setColor(color);
+        [self dialog]->decideHandler()(*[self dialog]);
     }
 }
 @end
@@ -53,10 +53,10 @@ using namespace NativeDialog;
 namespace NativeDialog
 {
     OSXColorPanel * nativeCaller = nil;
-    
+
     std::map<ColorPickerDialog*,OSXColorPanel*> dialog_panelMap;
-    
-    
+
+
     void ColorPickerDialog::show()
     {
         auto foundIt = dialog_panelMap.find(this);
@@ -71,7 +71,7 @@ namespace NativeDialog
             OSXColorPanel* colorPanel = foundIt->second;
             [colorPanel show:this];
         }
-        
+
     }
 
     ColorPickerDialog::~ColorPickerDialog()
