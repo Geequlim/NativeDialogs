@@ -28,7 +28,7 @@ namespace NativeDialog
     using std::string;
     using std::vector;
     /// The empty string definition
-    extern string nullstr;
+    static string nullstr;
 
     /**
      * @class Dialog
@@ -49,31 +49,31 @@ namespace NativeDialog
 
         /// Set dialog title
         inline Dialog& setTitle(const string& title)
-        { 
+        {
           m_title = title;
           return *this;
         }
-        
+
         /// Get decide handler function
         inline const EventHandler& decideHandler()const { return m_decideHandler;}
-        
+
         /// Set decide handler function
         inline Dialog& setDecideHandler(const EventHandler& handler)
         {
           m_decideHandler = handler;
           return *this;
         }
-        
+
         /// Get cancel handler function
         inline const EventHandler& cancelHandler()const{ return m_cancelHandler;}
-        
+
         /// Set cancel handler function
         inline Dialog& setCancelHandler(const EventHandler& handler)
         {
           m_cancelHandler = handler;
           return *this;
         }
-        
+
     protected:
         /// Decide function handler
         EventHandler m_decideHandler = nullHandler;
@@ -82,8 +82,8 @@ namespace NativeDialog
         /// Title text
         string m_title = nullstr;
     };
-    
-    
+
+
     namespace String
     {
         /// split string with pattern

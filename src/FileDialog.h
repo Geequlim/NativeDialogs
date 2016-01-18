@@ -4,13 +4,14 @@
 namespace NativeDialog
 {
    /*!
-     @brief File dialog for multi-platforms to select open and save file path
-     @par Support select file(s) and directory(directories)
-     @par Support set select filters
-     @par It use native user interface on Windows,Mac OSX and Linux(GTK+3.0 is required)
+     @brief File dialog to select file pathes both open and save mode are supported
+     @par Select file(s) and directory(directories)
+     @par Selection filters are supported
+     @par Platforms: Windows, Mac OSX and *inux(GTK+3.0 is required)
      @attention Select both file and directory mode is not supported on Linux if you set to this mode the dialog only allows folder selection
-     @attention Select both file and directory mode is not full supported on windows for select multiple both file and dirctory mode
-     @note Dispatching NormalEventType::CONFIRMED event when selection confirmed or dispatching NormalEventType::CANCELED event when selection canceled
+     @attention Select both file and directory mode is NOT full supported on windows for select multiple file and dirctory mode
+     @note The @b decideHandler whould be called when selection confirmed or call the @b cancelHandler when selection canceled
+     @see Dialog::EventHandler
     */
   class FileDialog : public Dialog
   {
@@ -21,15 +22,15 @@ namespace NativeDialog
       enum FileDialogMode : unsigned int
       {
         /// Select file mode
-        SELECT_FILE     = 1,
+        SELECT_FILE     = 1U,
         /// Select directory mode
-        SELECT_DIR      = 2,
+        SELECT_DIR      = 2U,
         /// Select file and directory mode
         SELECT_FILE_DIR = SELECT_FILE | SELECT_DIR ,
         /// Allows multi selection , Windows does not support multiselect directorys
-        MULTI_SELECT    = 4,
+        MULTI_SELECT    = 4U,
         /// Select save file mode
-        SELECT_TO_SAVE  = 8
+        SELECT_TO_SAVE  = 8U
       };
 
       ///Default constructor
@@ -41,7 +42,7 @@ namespace NativeDialog
       }
 
       /*!
-       @brief  Construct a file dialog
+       @brief  Construct a file selection dialog
        @param title    The title text of the dialog
        @param mode     Selection mode
        @param eventOwner The event owner pointer
@@ -160,7 +161,7 @@ namespace NativeDialog
        @param initDir The default selected path(absolute path)
        */
       inline FileDialog& setDefaultPath(const string& initDir)
-      { 
+      {
         m_defaultPath = initDir;
         return *this;
       }
@@ -189,7 +190,7 @@ namespace NativeDialog
 
       /// Clear filters that means allow to select all kind of files
       inline FileDialog& clearFilters()
-      { 
+      {
         m_filter.clear();
         return *this;
       }
@@ -250,7 +251,7 @@ namespace NativeDialog
        *  @param mode The mode e.g (SELECT_FILE | SELECT_DIR | MULTI_SELECT) allows to select files and dirctories
        */
       inline FileDialog& setMode(unsigned int mode)
-      { 
+      {
         m_mode = mode;
         return *this;
       }

@@ -25,13 +25,13 @@ int main(int argc , char *argv[] )
 #ifdef ND_PLATFORM_GTK
     gtk_init(nullptr,nullptr);
 #endif
-    
+
     msgDialog.setDecideHandler([](const Dialog& dlg)
     {
        auto mdlg = dynamic_cast<const MessageDialog&>(dlg);
        if( mdlg.responseButtonIndex() == 1 )
        {
-           
+
            cdlg.setColor({1,0,1,1})
            .setDecideHandler( [](const Dialog& dlg)
                              {
@@ -46,7 +46,7 @@ int main(int argc , char *argv[] )
        }
        else if( mdlg.responseButtonTitle() == "File Dialog" )
        {
-           
+
            fdlg.setDefaultPath("..")
            .addFilter("Text Files","txt")
            .addFilter("Code files","c;cpp;h;hpp")
@@ -79,5 +79,5 @@ void fileSelHandler(const Dialog& dlg)
         msg += "\n";
     }
     MessageDialog("Notice",msg,{"Close"}).show();
-    
+
 }

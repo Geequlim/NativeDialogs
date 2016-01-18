@@ -1,0 +1,3 @@
+--std=c++11
+-Isrc
+-I/usr/include/gtk-3.0

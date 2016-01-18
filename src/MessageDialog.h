@@ -8,14 +8,14 @@ namespace NativeDialog
   {
     using super = Dialog;
   public:
-  
+
    /*!
     @brief Construct a message dialog
     @param title   The dialog title
     @param message The message content
     @param buttons Button titles
    */
-    MessageDialog( const string& title, 
+    MessageDialog( const string& title,
                    const string& message,
                    const vector<string>& buttons)
     {
@@ -23,7 +23,7 @@ namespace NativeDialog
       m_message = message;
       m_buttons = buttons;
     }
-    
+
     ~MessageDialog(){}
 
     /// Get button titles
@@ -34,7 +34,7 @@ namespace NativeDialog
 
     /// Set button titles
     inline MessageDialog& setButtons(const vector<string>& buttons)
-    { 
+    {
       m_buttons = buttons;
       return *this;
     }
@@ -44,7 +44,7 @@ namespace NativeDialog
 
     /// Set message content
     inline MessageDialog& setMessage(const string& msg)
-    { 
+    {
       m_message = msg;
       return *this;
     }
@@ -67,13 +67,13 @@ namespace NativeDialog
   private:
     /// The resonse button index
     int m_responseIndex;
-    
+
     /// Message content
     string m_message;
-    
+
     /// Buttons' title
     vector<string> m_buttons;
   };
-  
+
 }
 #endif //__ND_NativeMessageDialog_H__
