@@ -17,7 +17,11 @@ namespace NativeDialog
       
       // Add the message label
       auto  label = gtk_label_new (m_message.c_str());
-      gtk_container_add (GTK_CONTAINER (content_area), label);
+
+      auto box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+      gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 12);
+      gtk_container_add (GTK_CONTAINER (content_area), box);
+
       gtk_widget_show_all (dialog);
       
       // Add buttons
