@@ -27,6 +27,7 @@ namespace NativeDialog
     // Show GTK file chooser dialog
     void FileDialog::show()
     {
+      m_selectedPathes.clear();
       // The dialgo mode
       GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN; // Open File mode
       if( allowsDirectorySelection() && saveMode() && !allowsFileSelection() )
