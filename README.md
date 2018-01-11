@@ -16,12 +16,6 @@ Native Dialogs
 * Remove code under osx if it's not a OSX application
 * Remove code under win if it's not a Windows application
 
-## Dependences
-
-* r-lyeh's [bubble](https://github.com/r-lyeh/bubble) for message dialog on Window
-* GTK3 is required on Linux
-* Cocoa framework on Mac OSX
-
 ## Usage:
 
 ### Message Dialog

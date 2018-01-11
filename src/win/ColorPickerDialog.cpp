@@ -2,22 +2,24 @@
 #ifdef ND_PLATFORM_WIN
 #include <Windows.h>
 #include <Commdlg.h>
+#pragma comment(lib, "Comdlg32.lib")
+
 namespace NativeDialog
-{	
+{
 	using String::wstring;
 		void ColorPickerDialog::show()
 		{
-			CHOOSECOLOR cc;                 // common dialog box structure 
-			static COLORREF acrCustClr[16]; // array of custom colors 
+			CHOOSECOLOR cc;                 // common dialog box structure
+			static COLORREF acrCustClr[16]; // array of custom colors
 			HWND hwnd = nullptr;            // owner window
 
-			
+
 			static DWORD rgbCurrent = RGB( // initial color selection
-						m_color.r*255, 
+						m_color.r*255,
 						m_color.g*255,
-						m_color.b*255);        
-			
-			// Initialize CHOOSECOLOR 
+						m_color.b*255);
+
+			// Initialize CHOOSECOLOR
 			ZeroMemory(&cc, sizeof(cc));
 			cc.lStructSize = sizeof(cc);
 			cc.hwndOwner = hwnd;

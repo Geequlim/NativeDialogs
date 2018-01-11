@@ -3,8 +3,8 @@
 #include <Windows.h>
 #include <shlobj.h>
 #include <Commdlg.h>
-
-/// The file path string max length(in characters) definition on windows platform 
+#pragma comment(lib, "Comdlg32.lib")
+/// The file path string max length(in characters) definition on windows platform
 #ifndef PAHT_MAX_LENGHT
 #define PAHT_MAX_LENGHT 4096
 #endif
@@ -48,7 +48,7 @@ namespace NativeDialog
 			// The initilize directory
 			TCHAR *_initDir = string2TString(m_defaultPath);
 
-			//Select diectory or file 
+			//Select diectory or file
 			if (allowsDirectorySelection())
 				selected = showDirectorySelector(szBuffer, _wndTitle, allowsFileSelection(), m_defaultPath);
 			//Select file
@@ -69,7 +69,7 @@ namespace NativeDialog
 				if (m_filter.size())
 				{
 					string tempFilter;
-					//Format filter string： Text Files%*.txt;*.TXT%XML Files%*.xml;*.XML%All Files%*.*%  
+					//Format filter string： Text Files%*.txt;*.TXT%XML Files%*.xml;*.XML%All Files%*.*%
 					for (auto it = m_filter.begin(); it != m_filter.end(); ++it)
 					{
 						tempFilter += it->first;
@@ -98,7 +98,7 @@ namespace NativeDialog
 							tempFilter += "%";
 						}
 					}
-					//Format filter string： Text Files\0*.txt;*.TXT\0XML Files\0*.xml;*.XML\0All Files\0*.*\0 
+					//Format filter string： Text Files\0*.txt;*.TXT\0XML Files\0*.xml;*.XML\0All Files\0*.*\0
 					lpstrFilter = string2TString(tempFilter);
 
 					for (int i = 0; lpstrFilter[i] != '\0'; i++)
@@ -112,7 +112,7 @@ namespace NativeDialog
 					ofn.lpstrFilter = L"All Files(*.*)\0*.*\0";
 				ofn.nFilterIndex = 0;
 
-				// Set selected path buffer 
+				// Set selected path buffer
 				ofn.lpstrFile = szBuffer;
 				ofn.nMaxFile = sizeof(szBuffer) / sizeof(*szBuffer);
 

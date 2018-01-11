@@ -2,7 +2,9 @@
 #define __ND_DIALOGS_H__
 
 #if _WIN64 || _WIN32
-  #define ND_PLATFORM_WIN
+	#define ND_PLATFORM_WIN
+	#define UNICODE
+	#define _UNICODE
 #elif __APPLE__
     #include "TargetConditionals.h"
     //iOS Simulator
@@ -10,12 +12,12 @@
     #define ND_PLATFORM_OSX
     #endif
 #else
-  #define ND_PLATFORM_GTK
-  namespace NativeDialog
-  {
-    /// Iterate GTK events
-    void iterateGTKEvents();
-  }
+	#define ND_PLATFORM_GTK
+	namespace NativeDialog
+	{
+		/// Iterate GTK events
+		void iterateGTKEvents();
+	}
 #endif
 
 
